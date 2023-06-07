@@ -1,6 +1,24 @@
+---
+layout: post
+title: Beverbende
+---
+
 title: Beverbende
 baseurl: "/LAMAS" # the subpath of your site, e.g. /blog
 url: "https://sanneberends.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+
+
+  
+lsi: false
+safe: true
+source: [your repo's top level directory]
+incremental: false
+highlighter: rouge
+gist:
+  noscript: false
+kramdown:
+  math_engine: mathjax
+  syntax_highlighter: rouge
 
 header_pages:
   - index.md
