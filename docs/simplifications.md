@@ -1,3 +1,10 @@
+---
+layout: page
+title: Simplifications
+permalink: /simplifications/
+---
+
+
 # Simplifications of the game
 <!-- simplificatie
 een plaatje van hoe het eruit ziet -->
