@@ -2,10 +2,11 @@
 layout: post
 title: Beverbende
 ---
-theme: modernist
+
 title: Beverbende
 baseurl: "/LAMAS" # the subpath of your site, e.g. /blog
 url: "https://sanneberends.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+theme: jekyll-theme-slate
 
 
   
