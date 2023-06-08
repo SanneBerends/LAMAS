@@ -15,3 +15,5 @@ Games are played with 2 to 6 players. A game consists of four rounds, and the sc
 The way to win this game is by keeping track of the cards that are knowable. Obviously, you can know your own cards that you have seen or switched, and you can know cards from the other players if they take open cards from the discard pile. But there are more clues to pay attention to. If a player switches one of their card with a card from the deck, the other players know that the card they drew has a lower point count than the one they discarded. Also, when the special is card played that allows players to switch one of their cards with someone else, the other players can sometimes deduce that a higher-value card is switched for a lower-value card.
 
 Despite these ways to keep track of cards, after 'Bever' is called by a confident player, the game can still change drastically because all the other players still get to play one round, where a lot can happen.
+
+![Beverbende game](/images/beverbende_spel.jpeg)
