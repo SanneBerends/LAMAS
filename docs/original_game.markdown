@@ -5,7 +5,6 @@ permalink: /original_game/
 order: 1
 ---
 
-# Original game
 <!-- uitgebreide uitleg van het spel -->
 Beverbende is played with cards that contain 0 to 9 points. The aim of the game is to acquire the lowest sum of points with the four cards that are in front of each player. Each player has four cards, that are laid out face-down on the table in front of them. When the game starts, each player looks at the outer two of their own cards. The rest of the cards are placed face-down in the middle of the table, this is the deck. One card is flipped open next to the deck, this is the discard pile. Then taking turns, each player either takes a closed card from the deck, or an open card from the discard pile, looks at the value without showing the other players, and chooses to switch this card with one of their own. This way, players can reduce their points. When a player is convinced that their cards contain the lowest sum of all players, they say 'Bever'. After that, the other players play one more turn and then all the cards are turned around to count the points.
 

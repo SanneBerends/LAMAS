@@ -30,6 +30,8 @@ github_username:  SanneBerends
 
 # Build settings
 theme: minima
+minima:
+  skin: solarized
 plugins:
   - jekyll-feed
 

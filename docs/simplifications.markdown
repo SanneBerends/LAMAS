@@ -6,7 +6,7 @@ order: 2
 ---
 
 
-# Simplifications of the game
+
 In order to model this game using epistemic logic, we simplified the game in a number of ways:
 
 - Two players per game.
