@@ -1,7 +1,8 @@
 ---
 layout: page
 title: "Original Game"
-permalink: /original_game/
+permalink: /about/
+order: 1
 ---
 
 # Original game

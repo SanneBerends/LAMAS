@@ -2,6 +2,7 @@
 layout: page
 title: "Simplifications"
 permalink: /simplifications/
+order: 2
 ---
 
 
