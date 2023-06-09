@@ -28,10 +28,10 @@ class Beverbende:
 
     def fill_worlds(self):
         worlds = []
-        for card1 in range(0, 5):
-            for card2 in range(0, 5):
-                for card3 in range(0, 5):
-                    for card4 in range(0, 5):
+        for card1 in range(0, 2):
+            for card2 in range(0, 2):
+                for card3 in range(0, 2):
+                    for card4 in range(0, 2):
                         index = str(card1) + str(card2) + \
                             str(card3) + str(card4)
                         cards = {f'p1_1:{card1}': True, f'p1_2:{card2}': True,
@@ -59,50 +59,50 @@ class Beverbende:
             #add everywhere options with higher values
             case 1: #card from discard: replaces card1
                 #card1 known: cards1 larger than and equal to card1 removed
-                for i in range (new_card,5):
-                    Box_star(Not(Atom(f'p{player}_1:{i}')))
+                for i in range (new_card1,2):
+                    self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
                 #card2 <= card1 (old): cards2 larger than card1 removed
-                for i in range(card1+1, 5):
-                    Box_star(Not(Atom(f'p{player}_2:{i}')))
+                for i in range(card1+1, 2):
+                    self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
 
             case 2: #rcard from discard: replaces card2
                 #card2 known: cards2 larger than and equal to card2 removed
-                for i in range(new_card2,5):
-                    Box_star(Not(Atom(f'p{player}_2:{i}')))
+                for i in range(new_card2,2):
+                   self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
                 #card1 <= card2 (old): cards1 larger than card2 removed
-                for i in range(card2+1,5):
-                    Box_star(Not(Atom(f'p{player}_1:{i}')))
+                for i in range(card2+1,2):
+                    self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
 
             case 3: #card from deck: replaces card1
                 #card1<card1
-                for i in range (card1+1,5):
-                    Box_star(Not(Atom(f'p{player}_1:{i}')))
+                for i in range (card1+1,2):
+                    self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
                 #card2 <= card1
-                for i in range(card2,5):
-                    Box_star(Not(Atom(f'p{player}_2:{i}')))
+                for i in range(card2,2):
+                    self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
                 #c1<=discard
-                for i in range(discard,5):
-                    Box_star(Not(Atom(f'p{player}_1:{i}')))
+                for i in range(discard,2):
+                    self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
                 #c2 <= discard
                 for i in range():
-                    Box_star(Not(Atom(f'p{player}_2{i}')))
+                    self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_2{i}'))))
             case 4: #card from deck: replaces card2
                 #card1<=card1
-                for i in range(card1,5):
-                    Box_star(Not(Atom(f'p{player}_1:{i}')))
+                for i in range(card1,2):
+                    self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
                 #card2 < card1
-                for i in range(card2+1,5):
-                    Box_star(Not(Atom(f'p{player}_2:{i}')))
+                for i in range(card2+1,2):
+                    self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
                 #c1<=discard and c2<=discard
-                for i in range(discard,5):
-                    Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2{i}'))))
+                for i in range(discard,2):
+                    self.ks = self.ks.solve(Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2{i}')))))
             case 5: #card from deck: discards this deck_card
                 # c1<=discard and c2<=discard
-                for i in range(discard, 5):
-                    Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2{i}'))))
+                for i in range(discard, 2):
+                    self.ks = self.ks.solve(Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2{i}')))))
                 # c1<=new_discard and c2<=new_discard
-                for i in range(deck_card, 5):
-                    Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2{i}'))))
+                for i in range(deck_card, 2):
+                    self.ks = self.ks.solve(Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2{i}')))))
 
 
 def add_symmetric_edges(relations):
@@ -128,3 +128,9 @@ def add_reflexive_edges(worlds, relations):
             result_agents.add((world.name, world.name))
             result[agent] = result_agents
     return result
+
+beverbende = Beverbende('1111')
+print(beverbende.ks)
+print("\n")
+beverbende.public_announcement(1,1,1,1,0,0)
+print(beverbende.ks)
