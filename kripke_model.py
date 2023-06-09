@@ -18,23 +18,41 @@ class Beverbende:
     knowledge_base = []
 
     def __init__(self):
+        worlds = self.fill_worlds()
+
         worlds = [
-            World('1111', {'1:1': True, '2:1': True, '3:1': True, '4:1': True}),
-            World('1011', {'1:1': True, '2:0': True, '3:1': True, '4:1': True}),
-            World('0111', {'1:0': True, '2:1': True, '3:1': True, '4:1': True}),
-            World('0011', {'1:0': True, '2:0': True, '3:1': True, '4:1': True}),
-            World('1110', {'1:1': True, '2:1': True, '3:1': True, '4:0': True}),
-            World('1010', {'1:1': True, '2:0': True, '3:1': True, '4:0': True}),
-            World('0110', {'1:0': True, '2:1': True, '3:1': True, '4:0': True}),
-            World('0010', {'1:0': True, '2:0': True, '3:1': True, '4:0': True}),
-            World('1101', {'1:1': True, '2:1': True, '3:0': True, '4:1': True}),
-            World('1001', {'1:1': True, '2:0': True, '3:0': True, '4:1': True}),
-            World('0101', {'1:0': True, '2:1': True, '3:0': True, '4:1': True}),
-            World('0001', {'1:0': True, '2:0': True, '3:0': True, '4:1': True}),
-            World('1100', {'1:1': True, '2:1': True, '3:0': True, '4:0': True}),
-            World('1000', {'1:1': True, '2:0': True, '3:0': True, '4:0': True}),
-            World('0100', {'1:0': True, '2:1': True, '3:0': True, '4:0': True}),
-            World('0000', {'1:0': True, '2:0': True, '3:0': True, '4:0': True}),
+            World('1111', {'1:1': True, '2:1': True,
+                  '3:1': True, '4:1': True}),
+            World('1011', {'1:1': True, '2:0': True,
+                  '3:1': True, '4:1': True}),
+            World('0111', {'1:0': True, '2:1': True,
+                  '3:1': True, '4:1': True}),
+            World('0011', {'1:0': True, '2:0': True,
+                  '3:1': True, '4:1': True}),
+            World('1110', {'1:1': True, '2:1': True,
+                  '3:1': True, '4:0': True}),
+            World('1010', {'1:1': True, '2:0': True,
+                  '3:1': True, '4:0': True}),
+            World('0110', {'1:0': True, '2:1': True,
+                  '3:1': True, '4:0': True}),
+            World('0010', {'1:0': True, '2:0': True,
+                  '3:1': True, '4:0': True}),
+            World('1101', {'1:1': True, '2:1': True,
+                  '3:0': True, '4:1': True}),
+            World('1001', {'1:1': True, '2:0': True,
+                  '3:0': True, '4:1': True}),
+            World('0101', {'1:0': True, '2:1': True,
+                  '3:0': True, '4:1': True}),
+            World('0001', {'1:0': True, '2:0': True,
+                  '3:0': True, '4:1': True}),
+            World('1100', {'1:1': True, '2:1': True,
+                  '3:0': True, '4:0': True}),
+            World('1000', {'1:1': True, '2:0': True,
+                  '3:0': True, '4:0': True}),
+            World('0100', {'1:0': True, '2:1': True,
+                  '3:0': True, '4:0': True}),
+            World('0000', {'1:0': True, '2:0': True,
+                  '3:0': True, '4:0': True}),
         ]
 
         relations = {
@@ -48,6 +66,22 @@ class Beverbende:
         relations.update(add_symmetric_edges(relations))
 
         self.ks = KripkeStructure(worlds, relations)
+
+    def fill_worlds(self):
+        worlds = []
+        for card1 in range(0, 4):
+            for card2 in range(0, 4):
+                for card3 in range(0, 4):
+                    for card4 in range(0, 4):
+                        index = str(card1) + str(card2) + \
+                            str(card3) + str(card4)
+                        cards = {f'1:{card1}': True, f'2:{card2}': True,
+                                 f'3:{card3}': True, f'4:{card4}': True}
+                        worlds.append(World(index, cards))
+        return worlds
+    
+    def fill_relations(self):
+        return relations
 
 
 def add_symmetric_edges(relations):
