@@ -59,29 +59,50 @@ class Beverbende:
             #add everywhere options with higher values
             case 1: #card from discard: replaces card1
                 #card1 known: cards1 larger than and equal to card1 removed
-                Not(Atom(f'p{player}_1:{new_card1}'))
+                for i in range (new_card,5):
+                    Box_star(Not(Atom(f'p{player}_1:{i}')))
                 #card2 <= card1 (old): cards2 larger than card1 removed
-                Not(Atom(f'p{player}_2:{card1}')) #klopt nog niet, alleen hoger, niet ook gelijk
+                for i in range(card1+1, 5):
+                    Box_star(Not(Atom(f'p{player}_2:{i}')))
+
             case 2: #rcard from discard: replaces card2
                 #card2 known: cards2 larger than and equal to card2 removed
-                Not(Atom(f'p{player}_2:{new_card2}'))
+                for i in range(new_card2,5):
+                    Box_star(Not(Atom(f'p{player}_2:{i}')))
                 #card1 <= card2 (old): cards1 larger than card2 removed
-                Not(Atom(f'p{player}_1:{card2}')) #klopt nog niet, alleen hoger, niet ook gelijk
+                for i in range(card2+1,5):
+                    Box_star(Not(Atom(f'p{player}_1:{i}')))
+
             case 3: #card from deck: replaces card1
-                #card1<card1 and card2<=card1
-                And(Not(Atom(f'p{player}_1:{card1}')), Not(Atom(f'p{player}_2:{card2}'))) #klopt nog niet, alleen hoger bij 1
-                #c1<=discard and c2<=discard
-                And(Not(Atom(f'p{player}_1:{discard}')), Not(Atom(f'p{player}_2{discard}')))
+                #card1<card1
+                for i in range (card1+1,5):
+                    Box_star(Not(Atom(f'p{player}_1:{i}')))
+                #card2 <= card1
+                for i in range(card2,5):
+                    Box_star(Not(Atom(f'p{player}_2:{i}')))
+                #c1<=discard
+                for i in range(discard,5):
+                    Box_star(Not(Atom(f'p{player}_1:{i}')))
+                #c2 <= discard
+                for i in range():
+                    Box_star(Not(Atom(f'p{player}_2{i}')))
             case 4: #card from deck: replaces card2
-                #card1<=card1 and card2<card1
-                And(Not(Atom(f'p{player}_1:{card1}')), Not(Atom(f'p{player}_2:{card2}'))) #klopt nog niet, alleen hoger bij 2
+                #card1<=card1
+                for i in range(card1,5):
+                    Box_star(Not(Atom(f'p{player}_1:{i}')))
+                #card2 < card1
+                for i in range(card2+1,5):
+                    Box_star(Not(Atom(f'p{player}_2:{i}')))
                 #c1<=discard and c2<=discard
-                And(Not(Atom(f'p{player}_1:{discard}')), Not(Atom(f'p{player}_2{discard}')))
+                for i in range(discard,5):
+                    Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2{i}'))))
             case 5: #card from deck: discards this deck_card
                 # c1<=discard and c2<=discard
-                And(Not(Atom(f'p{player}_1:{discard}')), Not(Atom(f'p{player}_2{discard}')))
+                for i in range(discard, 5):
+                    Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2{i}'))))
                 # c1<=new_discard and c2<=new_discard
-                And(Not(Atom(f'p{player}_1:{deck_card}')), Not(Atom(f'p{player}_2{deck_card}')))
+                for i in range(deck_card, 5):
+                    Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2{i}'))))
 
 
 def add_symmetric_edges(relations):
