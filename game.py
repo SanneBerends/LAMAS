@@ -14,13 +14,15 @@ class Player:
     def play(self, card):
         if self.card1.value < self.card2.value:
             if card.value < self.card2.value:
+                discard_card = self.card2
                 self.set_card2(card)
-                return 1
+                return discard_card
         else:
             if card.value < self.card1.value:
+                discard_card = self.card1
                 self.set_card1(card)
-                return 1
-        return 0
+                return discard_card
+        return card
 
     def get_card1(self):
         return self.card1
@@ -72,22 +74,21 @@ def play_round(turn, player1, player2, deck, discard_pile):
                     print('player ' + str(turn) + ' picked from deck')
                     card = deck.draw_card()
                     if turn == 1:
-                        placed = player1.play(card)
+                        discard_card = player1.play(card)
                     else:
-                        placed = player2.play(card)
-                    if not placed:
-                        discard_pile.append(card)
+                        discard_card = player2.play(card)
+                    discard_pile.append(discard_card)
                     played = 1
                 if 400 <= event.pos[0] <= 510 and 257 <= event.pos[1] <= 428 and discard_pile is not None:
                     # discard pile
                     print('player ' + str(turn) + ' picked from discard pile')
                     card = discard_pile[-1]
                     if turn == 1:
-                        placed = player1.play(card)
+                        discard_card = player1.play(card)
                     else:
-                        placed = player2.play(card)
-                    if placed:
-                        discard_pile = discard_pile[:-1]
+                        discard_card = player2.play(card)
+                    discard_pile = discard_pile[:-1]
+                    discard_pile.append(discard_card)
                     played = 1
     return discard_pile
 

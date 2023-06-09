@@ -31,17 +31,6 @@ font = pygame.font.SysFont('comicsans', 20, False)
 font_bolt = pygame.font.SysFont('comicsans', 20, True)
 
 def render_game_env(window, player1, player2, discard_pile, turn):
-    if turn == 1:
-        text = font_bolt.render('Player 1', True, (0, 0, 0))
-        window.blit(text, (141, 15))
-        text = font.render('Player 2', True, (0, 0, 0))
-        window.blit(text, (141, 415))
-    else:
-        text = font_bolt.render('Player 2', True, (0, 0, 0))
-        window.blit(text, (141, 415))
-        text = font.render('Player 1', True, (0, 0, 0))
-        window.blit(text, (141, 15))
-
     #draw initial cards
     card_places = [(50,50), (200,50), (50,450), (200,450)]
     cards = [player1.get_card1(), player1.get_card2(), player2.get_card1(), player2.get_card2()]
@@ -53,8 +42,23 @@ def render_game_env(window, player1, player2, discard_pile, turn):
     for pile_place in pile_places:
         window.blit(card_image, pile_place)
 
-    if discard_pile:
-        window.blit(card_images[discard_pile[-1].value], (400, 257))
+    #create discard pile
+    window.blit(card_images[discard_pile[-1].value], (400, 257))
+
+    if turn == 1:
+        text = font_bolt.render('Player 1', True, (0, 0, 0))
+        window.blit(text, (141, 15))
+        text = font.render('Player 2', True, (0, 0, 0))
+        window.blit(text, (141, 415))
+        window.blit(card_image, (50,450))
+        window.blit(card_image, (200, 450))
+    else:
+        text = font_bolt.render('Player 2', True, (0, 0, 0))
+        window.blit(text, (141, 415))
+        text = font.render('Player 1', True, (0, 0, 0))
+        window.blit(text, (141, 15))
+        window.blit(card_image, (50, 50))
+        window.blit(card_image, (200, 50))
 
     return window
 
@@ -91,10 +95,12 @@ if __name__ == "__main__":
 
     beverbende = 0
     turn = 1
-    discard_pile = []
+    discard_pile = [deck.draw_card()]
     render_interface(player1, player2, discard_pile, turn)
     while not beverbende:
         discard_pile = play_round(turn, player1, player2, deck, discard_pile)
+        render_interface(player1, player2, discard_pile, turn)
+        pygame.time.wait(500)
         if turn == 1: turn = 2
         else: turn = 1
         render_interface(player1, player2, discard_pile, turn)
