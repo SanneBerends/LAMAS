@@ -16,4 +16,4 @@ For this project, a simplified version of the game 'Beverbende' was modelled usi
 
 This report contains the rules of the original game, the simplifications that were made, details about the implementation, the formal modal, an example run and finally a conclusion.
 
-![Beverbende game](/images/Beverbende_overview.jpeg)
+![Beverbende game](/images/beverbende_overview.jpeg)
