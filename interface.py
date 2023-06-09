@@ -93,6 +93,8 @@ if __name__ == "__main__":
     player1 = Player(card1, card2)
     player2 = Player(card3, card4)
 
+    kripke_model = Beverbende(f'{card1.value}{card2.value}{card3.value}{card4.value}')
+
     beverbende = 0
     turn = 1
     discard_pile = [deck.draw_card()]
