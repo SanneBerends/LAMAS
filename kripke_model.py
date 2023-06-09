@@ -21,17 +21,16 @@ class Beverbende:
         relations = self.fill_relations(worlds)
 
         relations.update(add_reflexive_edges(worlds, relations))
-        # relations.update(add_symmetric_edges(relations))
 
         self.ks = KripkeStructure(worlds, relations)
         self.current_world = current_world
 
     def fill_worlds(self):
         worlds = []
-        for card1 in range(0, 2):
-            for card2 in range(0, 2):
-                for card3 in range(0, 2):
-                    for card4 in range(0, 2):
+        for card1 in range(0, 5):
+            for card2 in range(0, 5):
+                for card3 in range(0, 5):
+                    for card4 in range(0, 5):
                         index = str(card1) + str(card2) + \
                             str(card3) + str(card4)
                         cards = {f'p1_1:{card1}': True, f'p1_2:{card2}': True,
@@ -55,68 +54,55 @@ class Beverbende:
         return relations
 
     def public_announcement(self, type, player, card1, card2, discard, new_card1=None, new_card2=None, deck_card=None):
-        match type:
-            #add everywhere options with higher values
-            case 1: #card from discard: replaces card1
-                #card1 known: cards1 larger than and equal to card1 removed
-                for i in range (new_card1,2):
-                    self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
-                #card2 <= card1 (old): cards2 larger than card1 removed
-                for i in range(card1+1, 2):
-                    self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
+        #add everywhere options with higher values
+        if type == 1: #card from discard: replaces card1
+            #card1 known: card1 larger than card1 removed
+            for i in range (new_card1+1,5):
+                self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
+            #card2 <= card1 (old): cards2 larger than card1 removed
+            for i in range(card1+1, 5):
+                self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
 
-            case 2: #rcard from discard: replaces card2
-                #card2 known: cards2 larger than and equal to card2 removed
-                for i in range(new_card2,2):
-                   self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
-                #card1 <= card2 (old): cards1 larger than card2 removed
-                for i in range(card2+1,2):
-                    self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
+        elif type == 2: #card from discard: replaces card2
+            #card2 known: card2 larger than card2 removed
+            for i in range(new_card2+1,5):
+               self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
+            #card1 <= card2 (old): cards1 larger than card2 removed
+            for i in range(card2+1,5):
+                self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
 
-            case 3: #card from deck: replaces card1
-                #card1<card1
-                for i in range (card1+1,2):
-                    self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
-                #card2 <= card1
-                for i in range(card2,2):
-                    self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
-                #c1<=discard
-                for i in range(discard,2):
-                    self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
-                #c2 <= discard
-                for i in range():
-                    self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_2{i}'))))
-            case 4: #card from deck: replaces card2
-                #card1<=card1
-                for i in range(card1,2):
-                    self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
-                #card2 < card1
-                for i in range(card2+1,2):
-                    self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
-                #c1<=discard and c2<=discard
-                for i in range(discard,2):
-                    self.ks = self.ks.solve(Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2{i}')))))
-            case 5: #card from deck: discards this deck_card
-                # c1<=discard and c2<=discard
-                for i in range(discard, 2):
-                    self.ks = self.ks.solve(Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2{i}')))))
-                # c1<=new_discard and c2<=new_discard
-                for i in range(deck_card, 2):
-                    self.ks = self.ks.solve(Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2{i}')))))
+        elif type == 3: #card from deck: replaces card1
+            #new card1 < card1
+            for i in range (card1,5):
+                self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
+            #card2 <= card1 (old)
+            for i in range(card1+1,5):
+                self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
+            #c1 <= discard
+            for i in range(discard+1,5):
+                self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
+            #c2 <= discard
+            for i in range(discard+1,5):
+                self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_2{i}'))))
 
+        elif type == 4: #card from deck: replaces card2
+            #new card2 < card2
+            for i in range(card2,5):
+                self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
+            #card1 <= card2
+            for i in range(card2+1,5):
+                self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
+            #c1 <= discard and c2 <= discard
+            for i in range(discard+1,5):
+                self.ks = self.ks.solve(Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2{i}')))))
 
-def add_symmetric_edges(relations):
-    """Routine adds symmetric edges to Kripke frame
-    """
-    result = {}
-    for agent, agents_relations in relations.items():
-        result_agents = agents_relations.copy()
-        for r in agents_relations:
-            x, y = r[1], r[0]
-            result_agents.add((x, y))
-        result[agent] = result_agents
-    return result
-
+        elif type == 5: #card from deck: discards this deck_card
+            # c1 <= discard and c2 <= discard
+            for i in range(discard+1,5):
+                self.ks = self.ks.solve(Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2{i}')))))
+            # c1 <= new_discard and c2 <= new_discard
+            for i in range(deck_card+1,5):
+                self.ks = self.ks.solve(Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2{i}')))))
 
 def add_reflexive_edges(worlds, relations):
     """Routine adds reflexive edges to Kripke frame
@@ -129,8 +115,19 @@ def add_reflexive_edges(worlds, relations):
             result[agent] = result_agents
     return result
 
-beverbende = Beverbende('1111')
-print(beverbende.ks)
-print("\n")
-beverbende.public_announcement(1,1,1,1,0,0)
-print(beverbende.ks)
+###### TO TEST THE PUBLIC ANNOUNCEMENT ##########
+#################################################
+# beverbende = Beverbende('1111')
+# print(beverbende.ks)
+# print("\n")
+# beverbende.public_announcement(1,1,1,1,0,0)
+# print(beverbende.ks)
+# print("\n")
+# beverbende.public_announcement(2,2,1,1,0,None,0)
+# print(beverbende.ks)
+# print("\n")
+# beverbende.public_announcement(4,1,0,1,1,None,0,0)
+# print(beverbende.ks)
+# print("\n")
+# beverbende.public_announcement(3,2,1,0,1,0)
+# print(beverbende.ks)
