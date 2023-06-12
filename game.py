@@ -22,7 +22,7 @@ class Player:
                 discard_card = self.card1
                 self.set_card1(card)
                 return discard_card, 1
-        return card, 0 #TODO: wat is card nummer hier? 
+        return card, 0
 
     def get_card1(self):
         return self.card1
@@ -47,8 +47,8 @@ class Card:
 class Deck:
     def __init__(self):
         self.cards = []
-        for card in [0, 1, 2, 3, 4] * 5:
-        # for card in [0, 1] * 5:
+        # for card in [0, 1, 2, 3, 4] * 5:
+        for card in [0,1] * 5:
             self.cards.append(Card(card))
         self.shuffle()
 
@@ -67,7 +67,7 @@ class Deck:
         return len(self.cards)
 
 
-def play_round(turn, player1, player2, deck, discard_pile, kripke_model):
+def play_round(turn, player1, player2, deck, discard_pile):
     played = 0
     type = 0
     card = 0
@@ -83,17 +83,14 @@ def play_round(turn, player1, player2, deck, discard_pile, kripke_model):
                     card = deck.draw_card()
                     if turn == 1:
                         discard_card, card_number = player1.play(card)
-                        if card_number == 1:
-                            type = 3
-                        if card_number == 0:
-                            type = 5
-
                     else:
                         discard_card, card_number = player2.play(card)
-                        if card_number == 2:
-                            type = 4
-                        if card_number == 0:
-                            type = 5
+                    if card_number == 1:
+                        type = 3
+                    if card_number == 2:
+                        type = 4
+                    if card_number == 0:
+                        type = 5
                     
                     discard_pile.append(discard_card)
                     played = 1
@@ -103,13 +100,12 @@ def play_round(turn, player1, player2, deck, discard_pile, kripke_model):
                     card = discard_pile[-1]
                     if turn == 1:
                         discard_card, card_number = player1.play(card)
-                        if card_number == 1:
-                            type = 1
-
                     else:
                         discard_card, card_number = player2.play(card)
-                        if card_number == 2:
-                            type = 2
+                    if card_number == 1:
+                        type = 1
+                    if card_number == 2:
+                        type = 2
                         
                     discard_pile = discard_pile[:-1]
                     discard_pile.append(discard_card)

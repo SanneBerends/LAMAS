@@ -54,11 +54,11 @@ class Beverbende:
             relations[key] = relations_set
         return relations
 
-    def public_announcement(self, type, player, card1, card2, discard=None, new_card1=None, new_card2=None, deck_card=None):
+    def public_announcement(self, type, player, card1, card2, discard=None, deck_card=None):
         #add everywhere options with higher values
         if type == 1: #card from discard: replaces card1
             #card1 known: card1 larger than card1 removed
-            for i in range (new_card1+1, 2):
+            for i in range (discard+1, 2):
                 self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
             #card2 <= card1 (old): cards2 larger than card1 removed
             for i in range(card1+1, 2):
@@ -66,7 +66,7 @@ class Beverbende:
 
         elif type == 2:  # card from discard: replaces card2
             # card2 known: card2 larger than card2 removed
-            for i in range(new_card2+1, 2):
+            for i in range(discard+1, 2):
                 self.ks = self.ks.solve(
                     Box_star(Not(Atom(f'p{player}_2:{i}'))))
             # card1 <= card2 (old): cards1 larger than card2 removed
@@ -89,7 +89,7 @@ class Beverbende:
                     Box_star(Not(Atom(f'p{player}_1:{i}'))))
             #c2 <= discard
             for i in range(discard+1, 2):
-                self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_2{i}'))))
+                self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
 
         elif type == 4:  # card from deck: replaces card2
             # new card2 < card2
@@ -103,17 +103,17 @@ class Beverbende:
             #c1 <= discard and c2 <= discard
             for i in range(discard+1, 2):
                 self.ks = self.ks.solve(
-                    Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2{i}')))))
+                    Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}')))))
 
         elif type == 5:  # card from deck: discards this deck_card
             # c1 <= discard and c2 <= discard
             for i in range(discard+1, 2):
                 self.ks = self.ks.solve(
-                    Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2{i}')))))
+                    Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}')))))
             # c1 <= new_discard and c2 <= new_discard
             for i in range(deck_card+1, 2):
                 self.ks = self.ks.solve(
-                    Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2{i}')))))
+                    Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}')))))
 
 
 def add_reflexive_edges(worlds, relations):
