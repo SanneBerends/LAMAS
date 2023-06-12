@@ -12,7 +12,6 @@ class Player:
         self.card2 = card2
 
     def play(self, card):
-        replaced_card = 0  # return whether card1 or card2 is replaced
         if self.card1.value < self.card2.value:
             if card.value < self.card2.value:
                 discard_card = self.card2
@@ -48,8 +47,8 @@ class Card:
 class Deck:
     def __init__(self):
         self.cards = []
-        #  for card in [0, 1, 2, 3, 4] * 5:
-        for card in [0, 1] * 5:
+        for card in [0, 1, 2, 3, 4] * 5:
+        # for card in [0, 1] * 5:
             self.cards.append(Card(card))
         self.shuffle()
 

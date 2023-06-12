@@ -47,12 +47,10 @@ class Beverbende:
                 for reachable_world in worlds:
                     if key == 1:
                         if world.name[:2] == reachable_world.name[:2]:
-                            relations_set.add(
-                                (world.name, reachable_world.name))
+                            relations_set.add((world.name, reachable_world.name))
                     elif key == 2:
                         if world.name[-2:] == reachable_world.name[-2:]:
-                            relations_set.add(
-                                (world.name, reachable_world.name))
+                            relations_set.add((world.name, reachable_world.name))
             relations[key] = relations_set
         return relations
 
@@ -64,8 +62,7 @@ class Beverbende:
                 self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
             #card2 <= card1 (old): cards2 larger than card1 removed
             for i in range(card1+1, 5):
-                self.ks = self.ks.solve(
-                    Box_star(Not(Atom(f'p{player}_2:{i}'))))
+                self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
 
         elif type == 2:  # card from discard: replaces card2
             # card2 known: card2 larger than card2 removed

@@ -147,5 +147,4 @@ if __name__ == "__main__":
         else:
             turn = 1
         render_interface(player1, player2, discard_pile, turn)
-        print("world: ", kripke_model.ks.worlds)
-        print("relationships: ", kripke_model.ks.relations)
+
