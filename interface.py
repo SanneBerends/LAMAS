@@ -30,19 +30,22 @@ icon = pygame.transform.scale(icon, (110, 171))
 font = pygame.font.SysFont('comicsans', 20, False)
 font_bolt = pygame.font.SysFont('comicsans', 20, True)
 
+
 def render_game_env(window, player1, player2, discard_pile, turn):
-    #draw initial cards
-    card_places = [(50,50), (200,50), (50,450), (200,450)]
-    cards = [player1.get_card1(), player1.get_card2(), player2.get_card1(), player2.get_card2()]
-    for i in range(0,4):
+    # draw initial cards
+    card_places = [(50, 50), (200, 50), (50, 450), (200, 450)]
+    cards = [player1.get_card1(), player1.get_card2(),
+             player2.get_card1(), player2.get_card2()]
+    for i in range(0, 4):
         window.blit(card_images[cards[i].value], card_places[i])
 
     # create pile
-    pile_places = [(550, 250), (553, 253), (556, 256), (559, 259), (562, 262), (565, 265)]
+    pile_places = [(550, 250), (553, 253), (556, 256),
+                   (559, 259), (562, 262), (565, 265)]
     for pile_place in pile_places:
         window.blit(card_image, pile_place)
 
-    #create discard pile
+    # create discard pile
     window.blit(card_images[discard_pile[-1].value], (400, 257))
 
     if turn == 1:
@@ -50,7 +53,7 @@ def render_game_env(window, player1, player2, discard_pile, turn):
         window.blit(text, (141, 15))
         text = font.render('Player 2', True, (0, 0, 0))
         window.blit(text, (141, 415))
-        window.blit(card_image, (50,450))
+        window.blit(card_image, (50, 450))
         window.blit(card_image, (200, 450))
     else:
         text = font_bolt.render('Player 2', True, (0, 0, 0))
@@ -62,14 +65,15 @@ def render_game_env(window, player1, player2, discard_pile, turn):
 
     return window
 
+
 def render_kripke_model(window):
     number_of_worlds = 256
-    for i in range(0,number_of_worlds):
+    for i in range(0, number_of_worlds):
         theta = 2 * math.pi * i/number_of_worlds
         radius = 340
         x = 1050 + radius * math.cos(theta)
         y = 350 + radius * math.sin(theta)
-        pygame.draw.circle(window, (0, 0, 0), (x,y), 1)
+        pygame.draw.circle(window, (0, 0, 0), (x, y), 1)
 
 
 def render_interface(player1, player2, discard_pile, turn):
@@ -89,20 +93,29 @@ if __name__ == "__main__":
     '''Play the game by playing multiple rounds until beverbende
        @TODO: er staat nu nog niet in wanneer beverbende wordt geroepen!'''
     deck = Deck()
-    card1 = deck.draw_card(); card2 = deck.draw_card(); card3 = deck.draw_card(); card4 = deck.draw_card()
+    card1 = deck.draw_card()
+    card2 = deck.draw_card()
+    card3 = deck.draw_card()
+    card4 = deck.draw_card()
     player1 = Player(card1, card2)
     player2 = Player(card3, card4)
 
-    kripke_model = Beverbende(f'{card1.value}{card2.value}{card3.value}{card4.value}')
+    kripke_model = Beverbende(
+        f'{card1.value}{card2.value}{card3.value}{card4.value}')
 
     beverbende = 0
     turn = 1
     discard_pile = [deck.draw_card()]
     render_interface(player1, player2, discard_pile, turn)
     while not beverbende:
-        discard_pile = play_round(turn, player1, player2, deck, discard_pile)
+        discard_pile = play_round(
+            turn, player1, player2, deck, discard_pile, kripke_model)
         render_interface(player1, player2, discard_pile, turn)
         pygame.time.wait(500)
-        if turn == 1: turn = 2
-        else: turn = 1
+        if turn == 1:
+            turn = 2
+        else:
+            turn = 1
         render_interface(player1, player2, discard_pile, turn)
+        print("world: ", kripke_model.ks.worlds)
+        print("relationships: ", kripke_model.ks.relations)

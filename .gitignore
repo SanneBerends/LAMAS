@@ -4,3 +4,4 @@ __pycache__/game.cpython-38.pyc
 __pycache__/kripke_model.cpython-38.pyc
 mlsolver/__pycache__/formula.cpython-38.pyc
 mlsolver/__pycache__/kripke.cpython-38.pyc
+test.py
