@@ -43,6 +43,12 @@ header_pages:
   - formal_model.markdown
   - example.markdown
   - discussion.markdown
+
+parse:
+  myst_enable_extensions:
+    # don't forget to list any other extensions you want enabled,
+    # including those that are enabled by default!
+    - amsmath
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
