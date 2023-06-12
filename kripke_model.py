@@ -57,13 +57,12 @@ class Beverbende:
         return relations
 
     def public_announcement(self, type, player, card1, card2, discard=None, new_card1=None, new_card2=None, deck_card=None):
-        # add everywhere options with higher values
-        if type == 1:  # card from discard: replaces card1
-            # card1 known: card1 larger than card1 removed
-            for i in range(new_card1+1, 5):
-                self.ks = self.ks.solve(
-                    Box_star(Not(Atom(f'p{player}_1:{i}'))))
-            # card2 <= card1 (old): cards2 larger than card1 removed
+        #add everywhere options with higher values
+        if type == 1: #card from discard: replaces card1
+            #card1 known: card1 larger than card1 removed
+            for i in range (new_card1+1,5):
+                self.ks = self.ks.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
+            #card2 <= card1 (old): cards2 larger than card1 removed
             for i in range(card1+1, 5):
                 self.ks = self.ks.solve(
                     Box_star(Not(Atom(f'p{player}_2:{i}'))))
@@ -133,17 +132,17 @@ def add_reflexive_edges(worlds, relations):
 
 ###### TO TEST THE PUBLIC ANNOUNCEMENT ##########
 #################################################
-# beverbende = Beverbende('1111')
-# print(beverbende.ks)
-# print("\n")
-# beverbende.public_announcement(1,1,1,1,0,0)
-# print(beverbende.ks)
-# print("\n")
-# beverbende.public_announcement(2,2,1,1,0,None,0)
-# print(beverbende.ks)
-# print("\n")
-# beverbende.public_announcement(4,1,0,1,1,None,0,0)
-# print(beverbende.ks)
-# print("\n")
-# beverbende.public_announcement(3,2,1,0,1,0)
-# print(beverbende.ks)
+beverbende = Beverbende('1111')
+print(beverbende.ks)
+print("\n")
+beverbende.public_announcement(1,1,1,1,0,0)
+print(beverbende.ks)
+print("\n")
+beverbende.public_announcement(2,2,1,1,0,None,0)
+print(beverbende.ks)
+print("\n")
+beverbende.public_announcement(4,1,0,1,1,None,0,0)
+print(beverbende.ks)
+print("\n")
+beverbende.public_announcement(3,2,1,0,1,0)
+print(beverbende.ks)

@@ -17,15 +17,13 @@ class Player:
             if card.value < self.card2.value:
                 discard_card = self.card2
                 self.set_card2(card)
-                replaced_card = 2
-                return discard_card, replaced_card
+                return discard_card, 2
         else:
             if card.value < self.card1.value:
                 discard_card = self.card1
                 self.set_card1(card)
-                replaced_card = 1
-                return discard_card, replaced_card
-        return card, replaced_card
+                return discard_card, 1
+        return card, 0 #TODO: wat is card nummer hier? 
 
     def get_card1(self):
         return self.card1
@@ -43,11 +41,15 @@ class Player:
 class Card:
     def __init__(self, value):
         self.value = value
+    
+    def get_value(self):
+        return self.value
 
 class Deck:
     def __init__(self):
         self.cards = []
-        for card in [0, 1, 2, 3, 4] * 5:
+        #  for card in [0, 1, 2, 3, 4] * 5:
+        for card in [0, 1] * 5:
             self.cards.append(Card(card))
         self.shuffle()
 
@@ -68,6 +70,8 @@ class Deck:
 
 def play_round(turn, player1, player2, deck, discard_pile, kripke_model):
     played = 0
+    type = 0
+    card = 0
     while not played:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -79,9 +83,19 @@ def play_round(turn, player1, player2, deck, discard_pile, kripke_model):
                     print('player ' + str(turn) + ' picked from deck')
                     card = deck.draw_card()
                     if turn == 1:
-                        discard_card = player1.play(card)
+                        discard_card, card_number = player1.play(card)
+                        if card_number == 1:
+                            type = 3
+                        if card_number == 0:
+                            type = 5
+
                     else:
-                        discard_card = player2.play(card)
+                        discard_card, card_number = player2.play(card)
+                        if card_number == 2:
+                            type = 4
+                        if card_number == 0:
+                            type = 5
+                    
                     discard_pile.append(discard_card)
                     played = 1
                 if 400 <= event.pos[0] <= 510 and 257 <= event.pos[1] <= 428 and discard_pile is not None:
@@ -89,10 +103,17 @@ def play_round(turn, player1, player2, deck, discard_pile, kripke_model):
                     print('player ' + str(turn) + ' picked from discard pile')
                     card = discard_pile[-1]
                     if turn == 1:
-                        discard_card = player1.play(card)
+                        discard_card, card_number = player1.play(card)
+                        if card_number == 1:
+                            type = 1
+
                     else:
-                        discard_card = player2.play(card)
+                        discard_card, card_number = player2.play(card)
+                        if card_number == 2:
+                            type = 2
+                        
                     discard_pile = discard_pile[:-1]
                     discard_pile.append(discard_card)
                     played = 1
-    return discard_pile
+    return discard_pile, type, card
+
