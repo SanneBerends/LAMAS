@@ -100,7 +100,38 @@ if __name__ == "__main__":
     discard_pile = [deck.draw_card()]
     render_interface(player1, player2, discard_pile, turn)
     while not beverbende:
-        discard_pile = play_round(turn, player1, player2, deck, discard_pile)
+        discard_pile, type, card = play_round(turn, player1, player2, deck, discard_pile)
+
+        # determine card1 and card2
+        if turn == 1:
+            card1 = player1.get_card1().get_value()
+            card2 = player1.get_card2().get_value()
+        if turn == 2:
+            card1 = player2.get_card1().get_value()
+            card2 = player2.get_card2().get_value()
+        
+        # determine discard, new_card1 and new_card2
+        if type == 1:
+            discard = None
+            new_card1 = card.get_value()
+            new_card2 = None
+        if type == 2:
+            discard = None
+            new_card1 = None
+            new_card2 = card.get_value()
+        else:
+            discard = discard_pile[-1].get_value()
+            new_card1 = None
+            new_card2 = None
+
+        # determine deck_card
+        if type == 5:
+            deck_card = card.get_value()
+        else:
+            deck_card = None
+        
+        kripke_model.public_announcement(type, turn, card1, card2, discard, new_card1, new_card2, deck_card)
+        
         render_interface(player1, player2, discard_pile, turn)
         pygame.time.wait(500)
         if turn == 1: turn = 2
