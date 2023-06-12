@@ -6,24 +6,26 @@ import random
 Implementation of the game
 """
 
-
 class Player:
     def __init__(self, card1, card2):
         self.card1 = card1
         self.card2 = card2
 
     def play(self, card):
+        replaced_card = 0  # return whether card1 or card2 is replaced
         if self.card1.value < self.card2.value:
             if card.value < self.card2.value:
                 discard_card = self.card2
                 self.set_card2(card)
-                return discard_card
+                replaced_card = 2
+                return discard_card, replaced_card
         else:
             if card.value < self.card1.value:
                 discard_card = self.card1
                 self.set_card1(card)
-                return discard_card
-        return card
+                replaced_card = 1
+                return discard_card, replaced_card
+        return card, replaced_card
 
     def get_card1(self):
         return self.card1
@@ -36,6 +38,7 @@ class Player:
 
     def set_card2(self, card):
         self.card2 = card
+
 
 class Card:
     def __init__(self, value):
@@ -62,7 +65,8 @@ class Deck:
     def get_number_of_cards(self):
         return len(self.cards)
 
-def play_round(turn, player1, player2, deck, discard_pile):
+
+def play_round(turn, player1, player2, deck, discard_pile, kripke_model):
     played = 0
     while not played:
         for event in pygame.event.get():
