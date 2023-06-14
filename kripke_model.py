@@ -71,92 +71,112 @@ class Beverbende:
     def public_announcement(self, type, player, card1, card2, discard=None, deck_card=None):
         #add everywhere options with higher values
         if type == 1: #card from discard: replaces card1
-            #card1 known: card1 larger than card1 removed
+            #card1 known: cards1 larger than discard removed
             for i in range (discard+1, self.card_values):
                 if player == 1:
-                    self.ks_1 = self.ks_1.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
-                else:
                     self.ks_2 = self.ks_2.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
+                else:
+                    self.ks_1 = self.ks_1.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
             #card2 <= card1 (old): cards2 larger than card1 removed
             for i in range(card1+1, self.card_values):
                 if player == 1:
-                    self.ks_1 = self.ks_1.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
-                else:
                     self.ks_2 = self.ks_2.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
+                else:
+                    self.ks_1 = self.ks_1.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
 
         elif type == 2:  # card from discard: replaces card2
-            # card2 known: card2 larger than card2 removed
+            # card2 known: card2 larger than discard removed
             for i in range(discard+1, self.card_values):
                 if player == 1:
-                    self.ks_1 = self.ks_1.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
-                else:
                     self.ks_2 = self.ks_2.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
+                else:
+                    self.ks_1 = self.ks_1.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
             # card1 <= card2 (old): cards1 larger than card2 removed
             for i in range(card2+1, self.card_values):
                 if player == 1:
-                    self.ks_1 = self.ks_1.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
-                else:
                     self.ks_2 = self.ks_2.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
+                else:
+                    self.ks_1 = self.ks_1.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
 
         elif type == 3:  # card from deck: replaces card1
             # new card1 < card1
             for i in range(card1, self.card_values):
                 if player == 1:
-                    self.ks_1 = self.ks_1.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
-                else:
                     self.ks_2 = self.ks_2.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
+                else:
+                    self.ks_1 = self.ks_1.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
             #card2 <= card1 (old)
             for i in range(card1+1, self.card_values):
                 if player == 1:
-                    self.ks_1 = self.ks_1.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
-                else:
                     self.ks_2 = self.ks_2.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
-            #c1 <= discard
+                else:
+                    self.ks_1 = self.ks_1.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
+            #card1 <= discard
             for i in range(discard+1, self.card_values):
                 if player == 1:
-                    self.ks_1 = self.ks_1.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
-                else:
                     self.ks_2 = self.ks_2.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
-            #c2 <= discard
+                else:
+                    self.ks_1 = self.ks_1.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
+            #card2 <= discard
             for i in range(discard+1, self.card_values):
                 if player == 1:
-                    self.ks_1 = self.ks_1.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
-                else:
                     self.ks_2 = self.ks_2.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
+                else:
+                    self.ks_1 = self.ks_1.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
 
         elif type == 4:  # card from deck: replaces card2
             # new card2 < card2
             for i in range(card2, self.card_values):
                 if player == 1:
-                    self.ks_1 = self.ks_1.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
-                else:
                     self.ks_2 = self.ks_2.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
+                else:
+                    self.ks_1 = self.ks_1.solve(Box_star(Not(Atom(f'p{player}_2:{i}'))))
             #card1 <= card2
             for i in range(card2+1, self.card_values):
                 if player == 1:
-                    self.ks_1 = self.ks_1.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
-                else:
                     self.ks_2 = self.ks_2.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
-            #c1 <= discard and c2 <= discard
+                else:
+                    self.ks_1 = self.ks_1.solve(Box_star(Not(Atom(f'p{player}_1:{i}'))))
+            #card1 <= discard and card2 <= discard
             for i in range(discard+1, self.card_values):
                 if player == 1:
-                    self.ks_1 = self.ks_1.solve(Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}')))))
-                else:
                     self.ks_2 = self.ks_2.solve(Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}')))))
+                else:
+                    self.ks_1 = self.ks_1.solve(Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}')))))
 
         elif type == 5:  # card from deck: discards this deck_card
             # c1 <= discard and c2 <= discard
             for i in range(discard+1, self.card_values):
                 if player == 1:
-                    self.ks_1 = self.ks_1.solve(Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}')))))
-                else:
                     self.ks_2 = self.ks_2.solve(Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}')))))
+                else:
+                    self.ks_1 = self.ks_1.solve(Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}')))))
             # c1 <= new_discard and c2 <= new_discard
             for i in range(deck_card+1, self.card_values):
                 if player == 1:
-                    self.ks_1 = self.ks_1.solve(Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}')))))
-                else:
                     self.ks_2 = self.ks_2.solve(Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}')))))
+                else:
+                    self.ks_1 = self.ks_1.solve(Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}')))))
+
+        #new current worlds
+        if player == 1:
+            if type == 1:
+                self.current_world = f'{discard}'+self.current_world[1]+self.current_world[2]+self.current_world[3]
+            elif type == 2:
+                self.current_world = self.current_world[0]+f'{discard}'+self.current_world[2]+self.current_world[3]
+            elif type == 3:
+                self.current_world = f'{deck_card}'+self.current_world[1]+self.current_world[2]+self.current_world[3]
+            elif type == 4:
+                self.current_world = self.current_world[0]+f'{deck_card}'+self.current_world[2]+self.current_world[3]
+        elif player == 2:
+            if type == 1:
+                self.current_world = self.current_world[0]+self.current_world[1]+f'{discard}'+self.current_world[3]
+            elif type == 2:
+                self.current_world = self.current_world[0]+self.current_world[1]+self.current_world[2]+f'{discard}'
+            elif type == 3:
+                self.current_world = self.current_world[0]+self.current_world[1]+f'{deck_card}'+self.current_world[3]
+            elif type == 4:
+                self.current_world = self.current_world[0]+self.current_world[1]+self.current_world[2]+f'{deck_card}'
 
 
 def add_reflexive_edges(worlds, relations):
@@ -172,14 +192,14 @@ def add_reflexive_edges(worlds, relations):
 
 ###### TO TEST THE PUBLIC ANNOUNCEMENT ##########
 #################################################
-beverbende = Beverbende('1111')
-print("ks1: ", beverbende.ks_1)
-print("\n")
-print("\n")
-print("ks2: ", beverbende.ks_2)
-print("\n")
-print("----\n")
-print("\n")
+# beverbende = Beverbende('1111')
+# print("ks1: ", beverbende.ks_1)
+# print("\n")
+# print("\n")
+# print("ks2: ", beverbende.ks_2)
+# print("\n")
+# print("----\n")
+# print("\n")
 # beverbende.public_announcement(1,1,1,1)
 # print("ks1: ", beverbende.ks_1)
 # print("ks2: ", beverbende.ks_2)
