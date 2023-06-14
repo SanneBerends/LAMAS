@@ -6,7 +6,6 @@ order: 4
 ---
 For an agent to be certain that it has a lower sum of points on its own cards than that the opponent has, the agents make use of a Kripke model. The Kripke model is defined as: 
 
-![Kripke model](/images/Kripke.png)
 
 [//]: # ($M = <S, \pi, R_1, R_2 >$ where )
 
