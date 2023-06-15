@@ -166,18 +166,20 @@ if __name__ == "__main__":
         # obtaining knowledge
         if turn == 1:
             knowledge_base2 = kripke_model2.obtain_knowledge(knowledge_base2, type, turn, card1, card2, discard, deck_card)
-            for formula in knowledge_base2: kripke_model2.ks = kripke_model2.ks.solve(formula)
-            if type != 5:
-                kripke_model1 = Beverbende(
-                    f'{player1.card1.value}{player1.card2.value}{player2.card1.value}{player2.card2.value}', 1)
-                for formula in knowledge_base1: kripke_model1.ks = kripke_model1.ks.solve(formula)
+            kripke_model1 = Beverbende(
+                f'{player1.card1.value}{player1.card2.value}{player2.card1.value}{player2.card2.value}', 1)
+            for (i,formula) in knowledge_base1: kripke_model1.ks = kripke_model1.ks.solve(formula)
+            kripke_model2 = Beverbende(
+                f'{player1.card1.value}{player1.card2.value}{player2.card1.value}{player2.card2.value}', 2)
+            for (i,formula) in knowledge_base2: kripke_model2.ks = kripke_model2.ks.solve(formula)
         elif turn == 2:
             knowledge_base1 = kripke_model1.obtain_knowledge(knowledge_base1, type, turn, card1, card2, discard, deck_card,)
-            for formula in knowledge_base1: kripke_model1.ks = kripke_model1.ks.solve(formula)
-            if type != 5:
-                kripke_model2 = Beverbende(
-                    f'{player1.card1.value}{player1.card2.value}{player2.card1.value}{player2.card2.value}', 2)
-                for formula in knowledge_base2: kripke_model2.ks = kripke_model2.ks.solve(formula)
+            kripke_model1 = Beverbende(
+                f'{player1.card1.value}{player1.card2.value}{player2.card1.value}{player2.card2.value}', 1)
+            for (i,formula) in knowledge_base1: kripke_model1.ks = kripke_model1.ks.solve(formula)
+            kripke_model2 = Beverbende(
+                f'{player1.card1.value}{player1.card2.value}{player2.card1.value}{player2.card2.value}', 2)
+            for (i,formula) in knowledge_base2: kripke_model2.ks = kripke_model2.ks.solve(formula)
 
         # kripke_model.public_announcement(type, turn, card1, card2, discard, deck_card)
 

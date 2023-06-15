@@ -64,100 +64,107 @@ class Beverbende:
         return relations
 
     def obtain_knowledge(self, knowledge_base, type, player, card1, card2, discard=None, deck_card=None):
+        # delete knowledge from knowledge_base if needed
+        for (i,item) in knowledge_base:
+            if type == 1 or type == 3:
+                if i == 1:
+                    knowledge_base.remove((i,item))
+            if type == 2 or type == 4:
+                if i == 2:
+                    knowledge_base.remove((i, item))
+
         # add everywhere options with higher values
         if type == 1:  # card from discard: replaces card1
             # card1 known: cards1 larger than discard removed
-            for i in range(discard + 1, self.card_values):
-                if player == 1:
-                    knowledge_base.append(Box_star(Not(Atom(f'p{player}_1:{i}'))))
-                else:
-                    knowledge_base.append(Box_star(Not(Atom(f'p{player}_1:{i}'))))
+            if player == 1:
+                knowledge_base.append((1,Box_star((Atom(f'p{player}_1:{discard}')))))
+            else:
+                knowledge_base.append((1,Box_star((Atom(f'p{player}_1:{discard}')))))
             # card2 <= card1 (old): cards2 larger than card1 removed
             for i in range(card1 + 1, self.card_values):
                 if player == 1:
-                    knowledge_base.append(Box_star(Not(Atom(f'p{player}_2:{i}'))))
+                    knowledge_base.append((0,Box_star(Not(Atom(f'p{player}_2:{i}')))))
                 else:
-                    knowledge_base.append(Box_star(Not(Atom(f'p{player}_2:{i}'))))
+                    knowledge_base.append((0,Box_star(Not(Atom(f'p{player}_2:{i}')))))
 
         elif type == 2:  # card from discard: replaces card2
             # card2 known: card2 larger than discard removed
-            for i in range(discard + 1, self.card_values):
-                if player == 1:
-                    knowledge_base.append(Box_star(Not(Atom(f'p{player}_2:{i}'))))
-                else:
-                    knowledge_base.append(Box_star(Not(Atom(f'p{player}_2:{i}'))))
+            if player == 1:
+                knowledge_base.append((2,Box_star((Atom(f'p{player}_2:{discard}')))))
+            else:
+                knowledge_base.append((2,Box_star((Atom(f'p{player}_2:{discard}')))))
             # card1 <= card2 (old): cards1 larger than card2 removed
             for i in range(card2 + 1, self.card_values):
                 if player == 1:
-                    knowledge_base.append(Box_star(Not(Atom(f'p{player}_1:{i}'))))
+                    knowledge_base.append((0,Box_star(Not(Atom(f'p{player}_1:{i}')))))
                 else:
-                    knowledge_base.append(Box_star(Not(Atom(f'p{player}_1:{i}'))))
+                    knowledge_base.append((0,Box_star(Not(Atom(f'p{player}_1:{i}')))))
 
         elif type == 3:  # card from deck: replaces card1
             # new card1 < card1
             for i in range(card1, self.card_values):
                 if player == 1:
-                    knowledge_base.append(Box_star(Not(Atom(f'p{player}_1:{i}'))))
+                    knowledge_base.append((0,Box_star(Not(Atom(f'p{player}_1:{i}')))))
                 else:
-                    knowledge_base.append(Box_star(Not(Atom(f'p{player}_1:{i}'))))
+                    knowledge_base.append((0,Box_star(Not(Atom(f'p{player}_1:{i}')))))
             # card2 <= card1 (old)
             for i in range(card1 + 1, self.card_values):
                 if player == 1:
-                    knowledge_base.append(Box_star(Not(Atom(f'p{player}_2:{i}'))))
+                    knowledge_base.append((0,Box_star(Not(Atom(f'p{player}_2:{i}')))))
                 else:
-                    knowledge_base.append(Box_star(Not(Atom(f'p{player}_2:{i}'))))
+                    knowledge_base.append((0,Box_star(Not(Atom(f'p{player}_2:{i}')))))
             # card1 <= discard
             for i in range(discard + 1, self.card_values):
                 if player == 1:
-                    knowledge_base.append(Box_star(Not(Atom(f'p{player}_1:{i}'))))
+                    knowledge_base.append((0,Box_star(Not(Atom(f'p{player}_1:{i}')))))
                 else:
-                    knowledge_base.append(Box_star(Not(Atom(f'p{player}_1:{i}'))))
+                    knowledge_base.append((0,Box_star(Not(Atom(f'p{player}_1:{i}')))))
             # card2 <= discard
             for i in range(discard + 1, self.card_values):
                 if player == 1:
-                    knowledge_base.append(Box_star(Not(Atom(f'p{player}_2:{i}'))))
+                    knowledge_base.append((0,Box_star(Not(Atom(f'p{player}_2:{i}')))))
                 else:
-                    knowledge_base.append(Box_star(Not(Atom(f'p{player}_2:{i}'))))
+                    knowledge_base.append((0,Box_star(Not(Atom(f'p{player}_2:{i}')))))
 
         elif type == 4:  # card from deck: replaces card2
             # new card2 < card2
             for i in range(card2, self.card_values):
                 if player == 1:
-                    knowledge_base.append(Box_star(Not(Atom(f'p{player}_2:{i}'))))
+                    knowledge_base.append((0,Box_star(Not(Atom(f'p{player}_2:{i}')))))
                 else:
-                    knowledge_base.append(Box_star(Not(Atom(f'p{player}_2:{i}'))))
+                    knowledge_base.append((0,Box_star(Not(Atom(f'p{player}_2:{i}')))))
             # card1 <= card2
             for i in range(card2 + 1, self.card_values):
                 if player == 1:
-                    knowledge_base.append(Box_star(Not(Atom(f'p{player}_1:{i}'))))
+                    knowledge_base.append((0,Box_star(Not(Atom(f'p{player}_1:{i}')))))
                 else:
-                    knowledge_base.append(Box_star(Not(Atom(f'p{player}_1:{i}'))))
+                    knowledge_base.append((0,Box_star(Not(Atom(f'p{player}_1:{i}')))))
             # card1 <= discard and card2 <= discard
             for i in range(discard + 1, self.card_values):
                 if player == 1:
                     knowledge_base.append(
-                        Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}')))))
+                        (0,Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}'))))))
                 else:
                     knowledge_base.append(
-                        Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}')))))
+                        (0,Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}'))))))
 
         elif type == 5:  # card from deck: discards this deck_card
             # c1 <= discard and c2 <= discard
             for i in range(discard + 1, self.card_values):
                 if player == 1:
                     knowledge_base.append(
-                        Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}')))))
+                        (0,Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}'))))))
                 else:
                     knowledge_base.append(
-                        Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}')))))
+                        (0,Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}'))))))
             # c1 <= new_discard and c2 <= new_discard
             for i in range(deck_card + 1, self.card_values):
                 if player == 1:
                     knowledge_base.append(
-                        Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}')))))
+                        (0,Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}'))))))
                 else:
                     knowledge_base.append(
-                        Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}')))))
+                        (0,Box_star(And(Not(Atom(f'p{player}_1:{i}')), Not(Atom(f'p{player}_2:{i}'))))))
 
         # new current worlds
         if player == 1:
