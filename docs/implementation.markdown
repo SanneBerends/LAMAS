@@ -31,7 +31,8 @@ Kripke model is explained in more detail in the section [Formal Model](formal_mo
 ## Obtaining knowledge
 As the strategy of the agent relies on their knowledge, the agents have to expand their knowledge during the game. 
 The agent obtains knowledge during the opponents turn. There are multiple scenarios that can happen in which the 
-agent obtains knowledge and they are listed below. 
+agent obtains knowledge and they are listed below. The formal definitions of the public announcements induced by the
+scenarios can be found in the section [Formal Model](formal_model.markdown).
 
 ### Scenario 1
 The opponent picks the upper card from the discard pile and replaces one of its own 
@@ -108,8 +109,8 @@ that the opponent knows that all cards of the agent have a value of at most 3.
 Hence, when one of the agents takes an action, the opponent obtains knowledge by this. Besides, the agent obtains the
 knowledge that the opponent obtained this knowledge. Therefore, the agent and the opponent both have this same knowledge.
 This means that this knowledge became common knowledge. Each action taken by one of the agents can therefore also be 
-described as a public announcement. The formal definitions can be found in the section [Formal Model](formal_model.markdown).
+described as a public announcement. 
 
 [^1]: Pete Shinners (2011). PyGame - Python Game Development. Retrieved from [http://www.pygame.org](http://www.pygame.org)
-[^2]: Modal logic solver, (2017), GitHub repository, [https://github.com/erohkohl/mlsolver](https://github.com/erohkohl/mlsolver)
+[^2]: Modal logic solver (2017). GitHub repository. Retrieved from [https://github.com/erohkohl/mlsolver](https://github.com/erohkohl/mlsolver)
 

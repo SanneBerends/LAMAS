@@ -9,7 +9,7 @@ Final project of the course Logical Aspects of Multi Agent Systems. Created by A
 (s3632644) and Sanne Berends (s3772950)
 
 # Introduction
-For this project, a simplified version of the game 'Beverbende' was modelled using epistemic logic for the strategy of 
+For this project, a simplified version of the game 'Beverbende'[^1] was modelled using epistemic logic for the strategy of 
 the players. Beverbende is a simple Dutch game, where players have 4 cards each, and their goal is to minimize the total 
 worth of their cards. During the game they can interchange their cards with cards from a deck. When they think their total 
 card worth is lower than that of other players, they say 'Bever' and the game ends. We propose the use of a Kripke model 
@@ -23,3 +23,5 @@ the formal modal, an example run and finally a conclusion.
 ![Beverbende game, taken from https://www.intertoys.nl/beverbende](/images/beverbende_overview.jpeg)
 
 *Figure taken from [here](https://www.intertoys.nl/beverbende) .*
+
+[^1]: 999Games (2009). Beverbende, [https://www.999games.nl/beverbende.html](https://www.999games.nl/beverbende.html)
