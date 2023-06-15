@@ -48,7 +48,7 @@ class Deck:
     def __init__(self):
         self.cards = []
         # for card in [0, 1, 2, 3, 4] * 5:
-        for card in [0,1] * 5:
+        for card in [0,1,2,3] * 5:
             self.cards.append(Card(card))
         self.shuffle()
 
