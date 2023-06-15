@@ -14,7 +14,7 @@ class Beverbende:
     """
     Class models the Kripke structure of the Beverbende game.
     """
-    card_values = 4  # number of different card-values, so if this is 2 the values of the cards are 0 and 1
+    card_values = 5  # number of different card-values, so if this is 2 the values of the cards are 0 and 1
 
     def __init__(self, current_world, agent):
         self.current_world = current_world

@@ -84,13 +84,17 @@ def render_kripke_model(window, turn, kripke_model1, kripke_model2):
     drawn_worlds = {}
     for i,world in enumerate(kripke_worlds):
         theta = 2 * math.pi * i / number_of_worlds
-        radius = 330
+        radius = 320
         if number_of_worlds == 1: x = 1050
         else:x = 1050 + radius * math.cos(theta)
-        y = 360 + radius * math.sin(theta)
+        y = 350 + radius * math.sin(theta)
         if world.name == current_world: pygame.draw.circle(window, (0, 128, 0), (x, y), 5)
         else: pygame.draw.circle(window, (0, 0, 0), (x, y), 5)
-        drawn_worlds[world.name] = (x,y)
+        drawn_worlds[world.name] = (x, y)
+        text = font_small.render(world.name, True, (0, 0, 0))
+        if x < 1050: x -= 25
+        if y < 350: y -= 15
+        window.blit(text, (x,y))
 
     #draw relations
     colors = [(220,20,60), (0,0,128)]
