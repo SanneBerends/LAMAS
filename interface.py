@@ -1,7 +1,7 @@
 import pygame
 import math
 from game import *
-from kripke_model import *
+from kripke_model2 import *
 
 """ Interface
 
@@ -68,27 +68,33 @@ def render_game_env(window, player1, player2, discard_pile, turn):
     return window
 
 
-def render_kripke_model(window, turn, kripke_model):
+def render_kripke_model(window, turn, kripke_model1, kripke_model2):
     # determine whose kripke model to draw
     if turn == 1:
-        kripke_worlds = kripke_model.ks_1.worlds
-        kripke_relations = kripke_model.ks_1.relations
+        kripke_worlds = kripke_model1.ks.worlds
+        kripke_relations = kripke_model1.ks.relations
+        current_world = kripke_model1.current_world
     else:
-        kripke_worlds = kripke_model.ks_2.worlds
-        kripke_relations = kripke_model.ks_2.relations
+        kripke_worlds = kripke_model2.ks.worlds
+        kripke_relations = kripke_model2.ks.relations
+        current_world = kripke_model2.current_world
 
     #draw worlds
     number_of_worlds = len(kripke_worlds)
     drawn_worlds = {}
     for i,world in enumerate(kripke_worlds):
         theta = 2 * math.pi * i / number_of_worlds
-        radius = 330
+        radius = 320
         if number_of_worlds == 1: x = 1050
         else:x = 1050 + radius * math.cos(theta)
-        y = 360 + radius * math.sin(theta)
-        if world.name == kripke_model.current_world: pygame.draw.circle(window, (0, 128, 0), (x, y), 5)
+        y = 350 + radius * math.sin(theta)
+        if world.name == current_world: pygame.draw.circle(window, (0, 128, 0), (x, y), 5)
         else: pygame.draw.circle(window, (0, 0, 0), (x, y), 5)
-        drawn_worlds[world.name] = (x,y)
+        drawn_worlds[world.name] = (x, y)
+        text = font_small.render(world.name, True, (0, 0, 0))
+        if x < 1050: x -= 25
+        if y < 350: y -= 15
+        window.blit(text, (x,y))
 
     #draw relations
     colors = [(220,20,60), (0,0,128)]
@@ -105,7 +111,7 @@ def render_kripke_model(window, turn, kripke_model):
     window.blit(text, (1320, 31))
 
 
-def render_interface(player1, player2, discard_pile, turn, kripke_model):
+def render_interface(player1, player2, discard_pile, turn, kripke_model1, kripke_model2):
     # create background
     window = pygame.display.set_mode((1400, 700))
     window.fill((220, 220, 220))
@@ -114,7 +120,7 @@ def render_interface(player1, player2, discard_pile, turn, kripke_model):
     pygame.draw.line(window, (0, 0, 0), (700, 0), (700, 700))
 
     render_game_env(window, player1, player2, discard_pile, turn)
-    render_kripke_model(window, turn, kripke_model)
+    render_kripke_model(window, turn, kripke_model1, kripke_model2)
     pygame.display.update()
 
 
@@ -129,17 +135,21 @@ if __name__ == "__main__":
     player1 = Player(card1, card2)
     player2 = Player(card3, card4)
 
-    kripke_model = Beverbende(
-        f'{card1.value}{card2.value}{card3.value}{card4.value}')
+    kripke_model1 = Beverbende(
+        f'{card1.value}{card2.value}{card3.value}{card4.value}', 1)
+    kripke_model2 = Beverbende(
+        f'{card1.value}{card2.value}{card3.value}{card4.value}', 2)
+    knowledge_base1 = []
+    knowledge_base2 = []
 
     beverbende = 0
     turn = 1
     discard_pile = [deck.draw_card()]
-    render_interface(player1, player2, discard_pile, turn, kripke_model)
+    render_interface(player1, player2, discard_pile, turn, kripke_model1, kripke_model2)
     while not beverbende:
-        if turn == 1: print(kripke_model.ks_1)
-        else: print(kripke_model.ks_2)
-        print(kripke_model.current_world)
+        if turn == 1: print(kripke_model1.ks)
+        else: print(kripke_model2.ks)
+        print(kripke_model1.current_world, kripke_model2.current_world)
 
         # determine card1 and card2
         if turn == 1:
@@ -157,13 +167,31 @@ if __name__ == "__main__":
         else:
             deck_card = None
 
-        kripke_model.public_announcement(type, turn, card1, card2, discard, deck_card)
+        # obtaining knowledge
+        if turn == 1:
+            knowledge_base2 = kripke_model2.obtain_knowledge(knowledge_base2, type, turn, card1, card2, discard, deck_card)
+            kripke_model1 = Beverbende(
+                f'{player1.card1.value}{player1.card2.value}{player2.card1.value}{player2.card2.value}', 1)
+            for (i,formula) in knowledge_base1: kripke_model1.ks = kripke_model1.ks.solve(formula)
+            kripke_model2 = Beverbende(
+                f'{player1.card1.value}{player1.card2.value}{player2.card1.value}{player2.card2.value}', 2)
+            for (i,formula) in knowledge_base2: kripke_model2.ks = kripke_model2.ks.solve(formula)
+        elif turn == 2:
+            knowledge_base1 = kripke_model1.obtain_knowledge(knowledge_base1, type, turn, card1, card2, discard, deck_card,)
+            kripke_model1 = Beverbende(
+                f'{player1.card1.value}{player1.card2.value}{player2.card1.value}{player2.card2.value}', 1)
+            for (i,formula) in knowledge_base1: kripke_model1.ks = kripke_model1.ks.solve(formula)
+            kripke_model2 = Beverbende(
+                f'{player1.card1.value}{player1.card2.value}{player2.card1.value}{player2.card2.value}', 2)
+            for (i,formula) in knowledge_base2: kripke_model2.ks = kripke_model2.ks.solve(formula)
 
-        render_interface(player1, player2, discard_pile, turn, kripke_model)
+        # kripke_model.public_announcement(type, turn, card1, card2, discard, deck_card)
+
+        render_interface(player1, player2, discard_pile, turn, kripke_model1, kripke_model2)
         pygame.time.wait(2000)
         if turn == 1:
             turn = 2
         else:
             turn = 1
-        render_interface(player1, player2, discard_pile, turn, kripke_model)
+        render_interface(player1, player2, discard_pile, turn, kripke_model1, kripke_model2)
 
