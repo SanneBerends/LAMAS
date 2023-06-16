@@ -9,13 +9,13 @@ For an agent to be certain that it has a lower sum of points on its own cards th
 make use of a Kripke model. The Kripke model is defined as: 
 
 
-$M = <S, \pi, R_1, R_2 >$, where 
+![Model definition](/images/Model_formula.png), where 
 
-- $ S = \{s_1, s_2, ... s_{625}\}$
+- ![States definition](/images/States_formula.png)
 
-- $\pi$ is defined as follows: 
+- π is defined as follows: 
 
-  - $\pi (s_i) (p1\_1 = a)=\textbf{t}$ if player 1 has as card 1 a card valued $a$ in $s_i$.
+  - ![pi_p1_1 definition](/images/pi_p1_1.png) if player 1 has as card 1 a card valued $a$ in $s_i$.
 
   -  $\pi (s_i)(p1\_2 = a) =\textbf{t}$ if player 1 has as card 2 a card valued $a$ in $s_i$.
 
