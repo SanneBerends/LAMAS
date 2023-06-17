@@ -6,7 +6,9 @@ order: 4
 ---
 ## Kripke model
 For an agent to be certain that it has a lower sum of points on its own cards than that the opponent has, the agents 
-make use of a Kripke model. The Kripke model is defined as: 
+make use of a Kripke model. During the game, the interface does not show the entire Kripke model, due to time complexity
+of the visualization. See [Implementation](implementation.markdown) for more information about the interface. The Kripke 
+model described in this section the complete Kripke model. The Kripke model is defined as: 
 
 
 ![Model definition](/images/math/math1.png), where 
