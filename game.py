@@ -57,7 +57,6 @@ class Deck:
     def __init__(self, num_dif_cards):
         self.num_dif_cards = num_dif_cards
         self.cards = []
-        # for card in [0, 1, 2, 3, 4] * 5:
         for card in list(range(0,self.num_dif_cards)) * 5:
             self.cards.append(Card(card))
         self.shuffle()
