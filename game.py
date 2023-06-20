@@ -48,6 +48,9 @@ class Card:
     """
     def __init__(self, value):
         self.value = value
+    
+    def get_value(self):
+        return self.value
 
 
 class Deck:
@@ -59,7 +62,10 @@ class Deck:
         self.cards = []
         for card in list(range(0,self.num_dif_cards)) * 5:
             self.cards.append(Card(card))
-        self.shuffle()
+        #TODO: undo these changes:
+        self.cards.extend([Card(2), Card(1), Card(2), Card(0), Card(3), Card(3), Card(3), Card(3)])
+        print("Cards after initialization: ", self.cards)
+        # self.shuffle()
 
     def shuffle(self):
         ''' shuffles the deck '''

@@ -168,9 +168,9 @@ if __name__ == "__main__":
     render_interface(player1, player2, discard_pile, turn, kripke_model1, kripke_model2, bever)
     while not bever:
         #TODO: verwijderen dat dit geprint wordt
-        if turn == 1: print(kripke_model1.ks)
-        else: print(kripke_model2.ks)
-        print(kripke_model1.current_world, kripke_model2.current_world)
+        # if turn == 1: print(kripke_model1.ks)
+        # else: print(kripke_model2.ks)
+        # print(kripke_model1.current_world, kripke_model2.current_world)
 
         # play round
         if turn == 1:
@@ -215,6 +215,7 @@ if __name__ == "__main__":
             if cards_total != 0:
                 for world in kripke_model1.ks.worlds:
                     if int(world.name[2]) + int(world.name[3]) <= cards_total:
+                        print("player1, sum of cards of world 2: ", int(world.name[2]) + int(world.name[3]))
                         bever = 0
         elif turn == 2:
             cards_total = player2.card1.value + player2.card2.value
@@ -222,6 +223,7 @@ if __name__ == "__main__":
             if cards_total != 0:
                 for world in kripke_model2.ks.worlds:
                     if int(world.name[0]) + int(world.name[1]) <= cards_total:
+                        print("player2, sum of cards of world 1: ", int(world.name[0]) + int(world.name[1]))
                         bever = 0
 
         # go to next round or stop the game when 'Bever' is called
