@@ -4,10 +4,12 @@ title: "Example"
 permalink: /example/
 order: 6
 ---
-To demonstrate the game, this section will show an example run. The values of the cards range from 0 to 3 instead of 0 to 4 because of runtime and more readable Kripke models.
+To demonstrate the game, this section will show an example run. The values of the cards range from 0 to 3 instead 
+of 0 to 4 because of runtime and more readable Kripke models.
 
 ## Starting position
-This is what the game looks like when it starts from the perspective of Player 1. Player 1 considers all worlds possible where player 1 has cards 2, 2 and player 2 has all other possible combinations of cards. 
+This is what the game looks like when it starts from the perspective of player 1. Player 1 considers all worlds possible 
+where player 1 has a value two on card one and a value two on card two, and player 2 has all other possible combinations of cards. 
 ![starting_position](/images/ex_start.png)
    *This figure shows the starting position of the example run game.*
 

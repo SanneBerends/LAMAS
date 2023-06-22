@@ -5,8 +5,8 @@ order: 8
 
 ---
 
-Final project of the course Logical Aspects of Multi Agent Systems. Created by Anniek Theuwissen (s3764818), Julia Boers 
-(s3632644) and Sanne Berends (s3772950)
+Final project of the course Logical Aspects of Multi Agent Systems. Created by Sanne Berends (s3772950), Julia Boers 
+(s3632644) and Anniek Theuwissen (s3764818).
 
 # Introduction
 For this project, a simplified version of the game 'Beverbende'[^1] was modelled using epistemic logic for the strategy of 
@@ -18,7 +18,7 @@ public announcements, which will be detailed later. The aim of this project is t
 Kripke model, a player can be certain to win when it calls 'Bever'.
 
 This report contains the rules of the original game, the simplifications that were made, details about the implementation, 
-the formal modal, an example run and finally a conclusion.
+the formal modal, an example run and finally a discussion.
 
 ![Beverbende game, taken from https://www.intertoys.nl/beverbende](/images/beverbende_overview.jpeg)
 
