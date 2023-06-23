@@ -63,7 +63,7 @@ class Deck:
         for card in list(range(0,self.num_dif_cards)) * 5:
             self.cards.append(Card(card))
         #TODO: undo these changes:
-        self.cards.extend([Card(2), Card(1), Card(2), Card(0), Card(3), Card(3), Card(3), Card(3)])
+        self.cards.extend([Card(2), Card(1), Card(2), Card(0), Card(3), Card(3), Card(4), Card(3)])
         print("Cards after initialization: ", self.cards)
         # self.shuffle()
 
