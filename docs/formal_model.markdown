@@ -45,7 +45,7 @@ model described in this section is the complete Kripke model. The Kripke model i
   ![pi_p2_1 definition](/images/math/math6.png) iff ![pi_p2_1 definition for s_j](/images/math/math18.png) and \
   ![pi_p2_2 definition](/images/math/math19.png) iff ![pi_p2_2 definition for s_j](/images/math/math20.png) 
 
-    (Worlds are connected by ![R_2](/images/math/math16.png) when player 2 has the same cards in both worlds.)
+  (Worlds are connected by ![R_2](/images/math/math16.png) when player 2 has the same cards in both worlds.)
 
 ## Obtaining knowledge
 After each turn, the Kripke model is updated. Each scenario that can happen during a turn corresponds to one or more 

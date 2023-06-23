@@ -12,6 +12,8 @@ Kripke model during the game. This section explains the implementation details.
 The implemented interface is divided into two sections: one for the game and one for the Kripke model (described in [Formal Model](formal_model.markdown)). 
 The game side shows the deck, the discard pile, two closed cards for the opponent and two open cards for the player whose turn it is. The
 Kripke model that is shown is not the complete Kripke model, but a decreased model, explained in the subsection Strategy.
+ ![interface](/images/interface.png)
+*This image shows the interface.*
 
 ## The agent's actions
 The two agents (i.e. the players) are at turn alternately. In an agent's turn, the agent has two options:
