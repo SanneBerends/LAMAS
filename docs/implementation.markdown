@@ -34,7 +34,7 @@ call 'Bever', the agents need knowledge about their own cards and about the card
 the agents obtain new knowledge after each turn. To keep track of their knowledge, the agents make use of a Kripke 
 model. This model keeps track of all possible combinations of cards and is updated after new knowledge is obtained. The 
 Kripke model is explained in more detail in the section [Formal Model](formal_model.markdown). However, the 
-number of possible worlds is large (625) and the agent only uses a small part of the Kripke model. Therefore, a decreased model
+number of possible worlds is large (256) and the agent only uses a small part of the Kripke model. Therefore, a decreased model
 is used by the agent, which is also the model that is shown in the interface. The interface only shows the states that 
 are relevant for the agent whose turn it is. This means that only worlds are included where the cards of the agent whose
 turn it is are equal to the real values of those cards. This reduces the Kripke model to a model with less worlds, and only
@@ -44,8 +44,8 @@ run, including images of both the complete and decreased Kripke model for clarit
 
 ## Obtaining knowledge
 As the strategy of the agent relies on their knowledge, the agents have to expand their knowledge during the game. 
-The agent obtains knowledge during the opponents turn. There are multiple scenarios that can happen in which the 
-agent obtains knowledge and they are listed below. The formal definitions of the public announcements induced by the
+The agent obtains knowledge during the opponent's turn. There are multiple scenarios that can happen in which the 
+agent obtains knowledge, and they are listed below. The formal definitions of the public announcements induced by the
 scenarios can be found in the section [Formal Model](formal_model.markdown).
 
 ### Scenario 1
@@ -53,7 +53,7 @@ The opponent picks the upper card from the discard pile and replaces one of its 
 cards with this card. In this situation, the agent obtains new knowledge about the cards of the opponent as it can 
 see the value of the card that the opponent picks. The agent now knows the value of one of the cards of the opponent. 
    - For example, when the opponent takes a card with value two from the discard pile, the agent knows that the opponent 
-   has one card with value two and that the sum of points on the cards of the opponent can range between 2 and 6.
+   has one card with value two and that the sum of points on the cards of the opponent can range between 2 and 5.
    ![case1](/images/case1.png)
    *This figure shows scenario 1, including the knowledge of the agent about the opponent's cards after the opponent's 
    turn.*
@@ -65,7 +65,7 @@ replaces a card with one of its own cards, the opponent adds its old card that i
 agent can see the number on this card and now knows that the opponent replaced this card by a card that is at least 
 one value lower. 
    - For example, when the opponent takes a card from the deck and replaces a card with value one by the new card, 
-   the agent knows that the new card of the opponent has value 0.
+   the agent knows that the new card of the opponent has value zero.
    ![case2](/images/case2.png)
    *This figure shows scenario 2, including the knowledge of the agent about the opponent's cards after the opponent's 
    turn.*

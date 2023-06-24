@@ -10,11 +10,11 @@ In order to model this game using epistemic logic, we simplified the game in a n
 - Two cards per player.
 - Only one iteration is played per game.
 - Players can view their own cards throughout the entire game.
-- Points on the cards go from 0 to 4.
+- Points on the cards go from 0 to 3.
 - No special cards.
 - After 'Bever' is said, the game stops immediately, so the other players do not get another turn.
 
-The resulting deck contains cards with values from 0 to 4. Each value occurs five times in the deck, resulting in 25
+The resulting deck contains cards with values from 0 to 3. Each value occurs five times in the deck, resulting in 20
 cards in total. This means that during the game, there are enough instances of each card type such that both cards of 
 both players could in theory have the same value.
 
@@ -27,6 +27,5 @@ to replace its card with the highest value by the new card.
 ![card1, taken from https://www.tabletopfinder.eu/nl/boardgame/413/beverbende](/images/bb1.jpg)
 ![card2, taken from https://www.tabletopfinder.eu/nl/boardgame/413/beverbende](/images/bb2.jpg)
 ![card3, taken from https://www.tabletopfinder.eu/nl/boardgame/413/beverbende](/images/bb3.jpg)
-![card4, taken from https://www.tabletopfinder.eu/nl/boardgame/413/beverbende](/images/bb4.jpg)
 
 *Figures taken from [here](https://www.tabletopfinder.eu/nl/boardgame/413/beverbende) .*
