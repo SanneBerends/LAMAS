@@ -4,7 +4,7 @@ title: "Discussion"
 permalink: /discussion/
 order: 7
 ---
-This website describes the game Beverbende, which simplifications we made to the game rules, how we implemented the 
+This website describes the rules of the game Beverbende, the simplifications we made to the game rules, how we implemented the 
 game, the logic behind the game (i.e. the formal model) and an example run. In the traditional game, it is always a 
 guess whether it is the right time to call ‘Bever’. The aim of the project was to find out whether keeping track of 
 all possible worlds allows a player to be certain that it will win if it calls ‘Bever’. The Kripke model guides the 
@@ -23,9 +23,9 @@ namely in the case that the opponent picks a card from the discard pile. This is
 of the range is what is needed to know if the player can safely call ‘Bever’. Therefore, the Kripke model does not add 
 valuable knowledge in all games, just in those where the opponent happens to pick a card from the discard pile.
 
-Furthermore, ‘Bever’ can only be called based on the Kripke model if the cards of the player are lower to those of 
+Furthermore, ‘Bever’ can only be called based on the Kripke model if the cards of the player are lower than those of 
 the opponent. In our simplified game with just four card values, there are also games in which the card values of the 
-players are too similar for any of the two to call ‘Bever’. In the original game, this problem would decrease, since 
+players are too similar for any of the two to call ‘Bever’. In the original game with ten card values, this problem would decrease since 
 the differences in card values between players are usually larger.
 
 To conclude: we saw that the use of a Kripke model and public announcements to update this model can guide the 

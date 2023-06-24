@@ -38,7 +38,8 @@ number of possible worlds is large (256) and the agent only uses a small part of
 is used by the agent, which is also the model that is shown in the interface. The interface only shows the states that 
 are relevant for the agent whose turn it is. This means that only worlds are included where the cards of the agent whose
 turn it is are equal to the real values of those cards. This reduces the Kripke model to a model with less worlds, and only
-relations for the playing agent, and thus not for the opponent. The section [Example](example.markdown) shows an example
+relations for the playing agent, and thus not for the opponent. Reflexive relations are omitted in the drawing.
+The section [Example](example.markdown) shows an example
 run, including images of both the complete and decreased Kripke model for clarity.
 
 
@@ -78,8 +79,8 @@ always replace a picked card with its own highest card (if the two differ in val
 that the opponent adds to the discard pile was the highest card that the opponent had at that moment. These situations,
 thus, also give information about the card that the opponent did not replace. 
    - For example, when the opponent replaces 
-   one of its cards and discards a card with value three, the agent knows that the highest card of the opponent has at 
-   most the value three. The sum of points on the cards of the opponent can therefore range between 0 and 5.
+   one of its cards and discards a card with value two, the agent knows that the highest card of the opponent has at 
+   most the value two. The sum of points on the cards of the opponent can therefore range between 0 and 3.
    ![case3](/images/case3.png)
    *This figure shows scenario 3, including the knowledge of the agent about the opponent's cards after the opponent's 
    turn.*
