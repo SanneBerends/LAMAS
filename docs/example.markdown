@@ -82,7 +82,7 @@ now knows the sum of cards of player 2, and they know that their own sum is lowe
    *This figure shows the situation of the game after turn 4.*
 
 ![kripke4](/images/ex_kripke4.png)
-   *This figure shows the complete Kripke model at after turn 4.*
+   *This figure shows the complete Kripke model after turn 4.*
 
 In all reachable worlds for player 1, which is just one in this example, the sum of cards of player 1 
 (i.e. 2) is lower than the sum of the cards of player 2 (i.e. 4). Therefore, player 1 calls 'Bever'.
