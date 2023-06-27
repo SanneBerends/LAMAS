@@ -31,9 +31,8 @@ card with value zero from the discard pile and discarding the card with value tw
 worlds possible where player 1 has either cards with values two and zero, or with values one and zero. 
 
 Player 2 knows 
-about the zero because that is the card drawn from the discard pile. Player 2 knows that the other card has value 
-one or two because if player 1 would have had two times value zero, they would have called 'Bever', and if they would 
-have had a card with value three they would have discarded that card in the previous turn, instead of discarding a two.
+about the zero because that is the card drawn from the discard pile. Player 2 knows that the other card has value zero,
+one or two because if player 1 would have had a card with value three they would have discarded that card in the previous turn, instead of discarding a two.
 ![sit_after_turn1](/images/ex_after_turn1.png)
    *This figure shows the situation of the game after turn 1.*
  
@@ -80,9 +79,6 @@ Player 1 has received a public announcement from player 2 picking a card with va
 now knows the sum of cards of player 2, and they know that their own sum is lower.
 ![sit_after_turn4](/images/ex_after_turn4.png)
    *This figure shows the situation of the game after turn 4.*
-
-![kripke4](/images/ex_kripke4.png)
-   *This figure shows the complete Kripke model after turn 4.*
 
 In all reachable worlds for player 1, which is just one in this example, the sum of cards of player 1 
 (i.e. 2) is lower than the sum of the cards of player 2 (i.e. 4). Therefore, player 1 calls 'Bever'.
