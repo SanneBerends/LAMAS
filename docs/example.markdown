@@ -55,7 +55,7 @@ Kripke model.
 The full Kripke model is updated as well. Only the worlds are considered where card two of player 1 is a zero and card two
 of player 2 is a two.
 ![kripke3](/images/ex_kripke3.png)
-   *This figure shows the complete Kripke model after turn 3.*
+   *This figure shows the complete Kripke model after turn 2.*
 
 ## Turn 3
 Player 1 is at turn. The card on the discard pile has value three, so they pick a card from the deck. 
@@ -69,6 +69,11 @@ this, so the complete Kripke model does not change after this turn.
 ![sit_after_turn3](/images/ex_after_turn3.png)
    *This figure shows the situation of the game after turn 3.*
 
+The full Kripke model is still the same as after turn 2.
+![kripke3](/images/ex_kripke3.png)
+   *This figure shows the complete Kripke model after turn 3.*
+
+
 ## Turn 4
 Player 2 picks a card with value two from the discard pile, replaces its first card and discards a card with value three.
 ![turn4](/images/ex_turn4.png)
@@ -79,6 +84,11 @@ Player 1 has received a public announcement from player 2 picking a card with va
 now knows the sum of cards of player 2, and they know that their own sum is lower.
 ![sit_after_turn4](/images/ex_after_turn4.png)
    *This figure shows the situation of the game after turn 4.*
+
+The full Kripke model is updated as well.
+![kripke3](/images/ex_kripke4.png)
+   *This figure shows the complete Kripke model after turn 4.*
+
 
 In all reachable worlds for player 1, which is just one in this example, the sum of cards of player 1 
 (i.e. 2) is lower than the sum of the cards of player 2 (i.e. 4). Therefore, player 1 calls 'Bever'.

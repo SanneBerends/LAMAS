@@ -86,28 +86,28 @@ if __name__ == "__main__":
     draw_kripke(worlds, relations, current_world, False)
 
     #after turn1
-    worlds = fill_worlds(0,4,0,1,0,4,0,4)
+    worlds = fill_worlds(0,3,0,1,0,4,0,4)
     relations = fill_relations(worlds)
     current_world = "2033"
 
     draw_kripke(worlds, relations, current_world)
 
     #after turn2
-    worlds = fill_worlds(0, 4, 0, 1, 0, 4, 2, 3)
+    worlds = fill_worlds(0, 3, 0, 1, 0, 4, 2, 3)
     relations = fill_relations(worlds)
     current_world = "2032"
 
     draw_kripke(worlds, relations, current_world)
 
     #after turn3: nothing changed
-    worlds = fill_worlds(0, 4, 0, 1, 0, 4, 2, 3)
+    worlds = fill_worlds(0, 3, 0, 1, 0, 4, 2, 3)
     relations = fill_relations(worlds)
     current_world = "2032"
 
     draw_kripke(worlds, relations, current_world)
 
     #after turn4
-    worlds = fill_worlds(0, 4, 0, 1, 2, 3, 2, 3)
+    worlds = fill_worlds(0, 3, 0, 1, 2, 3, 2, 3)
     relations = fill_relations(worlds)
     current_world = "2022"
 
