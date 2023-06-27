@@ -74,7 +74,7 @@ def draw_kripke(worlds, relations, current_world, draw_names_world=True):
     window.blit(text, (1320, 31))
 
     pygame.display.update()
-    pygame.time.wait(10000)
+    pygame.time.wait(20000)
 
 
 if __name__ == "__main__":
